@@ -642,7 +642,7 @@ function doPost(e) {
                     <p class="text-xs uppercase tracking-widest text-blue-200 font-bold mb-1">Nilai Akhir Anda</p>
                     <div class="text-5xl font-extrabold text-amber-400 my-1" id="res-score">100</div>
                     <p class="text-xs text-slate-200" id="res-summary">Benar 50 dari 50 Soal</p>
-                    <p class="text-[10px] text-blue-200 mt-2 leading-relaxed" id="res-scoring-note">Pilihan Ganda dinilai utuh. Benar/Salah dan Pilihan Ganda Kompleks dinilai per bagian.</p>
+                    <p class="text-[10px] text-blue-200 mt-2 leading-relaxed" id="res-scoring-note">Setiap soal Pilihan Ganda, pernyataan Benar/Salah, dan opsi Pilihan Ganda Kompleks bernilai satu poin.</p>
                 </div>
 
                 <div id="post-status-message" class="text-xs text-slate-500 mb-4 font-semibold">
@@ -1203,35 +1203,37 @@ Dokter kecil harus sigap dalam pelayanan kesehatan di sekolah. Untuk penanganan 
             pgQuestion(4, 'Faktor Persekutuan Terbesar (FPB) dari 27, 45, dan 63 adalah....', ['3', '9', '15', '21'], 'B'),
             pgQuestion(5, 'Hasil dari 30.126 − 25.875 : 25 × 17 + 2.417 adalah....', ['12.531', '14.948', '17.595', '20.218'], 'B'),
             pgQuestion(6, 'Diagram batang yang sesuai untuk menyajikan data pada tabel di atas adalah....', [chartOption([4, 8, 12, 9, 7]), chartOption([4, 9, 7, 12, 8]), chartOption([8, 9, 12, 7, 4]), chartOption([4, 9, 12, 7, 8])], 'D', { passage: dataNilaiMatematika }),
-            pgQuestion(7, 'Berdasarkan tabel pada soal nomor 6, selisih banyak siswa yang mendapat nilai tertinggi dan nilai terendah adalah....', ['4 siswa', '5 siswa', '8 siswa', '12 siswa'], 'A', { passage: dataNilaiMatematika }),
+            pgQuestion(7, 'Berdasarkan tabel pada soal nomor 6, selisih banyak siswa yang mendapat nilai tertinggi dan nilai terendah adalah....', ['4 siswa', '5 siswa', '8 siswa', '12 siswa'], 'C', { passage: dataNilaiMatematika }),
             pgQuestion(8, 'Sebuah wadah berbentuk balok memiliki ukuran panjang 45 dm, lebar 30 dm, dan tinggi 12 dm. Volume wadah tersebut adalah.... liter.', ['12.400', '14.200', '15.800', '16.200'], 'D'),
             pgQuestion(9, 'Sebuah kolam penampungan berkapasitas 16.200 liter baru terisi 3/5 bagian. Sisa air yang harus ditambahkan agar kolam penuh adalah.... liter.', ['5.420', '6.480', '9.720', '10.100'], 'B'),
             pgQuestion(10, 'Berikut ini yang bukan merupakan sifat segitiga sama kaki adalah....', ['Memiliki dua sisi yang sama panjang', 'Memiliki dua sudut yang sama besar', 'Kedua sudut yang sama besar berbentuk sudut tumpul', 'Jumlah seluruh sudut dalamnya adalah 180°'], 'C'),
             bsQuestion(11, 'Sebuah toren air berkapasitas 1,2 kL. Air dialirkan ke dalam bak sebanyak 3/4 bagian. Ibu menggunakan 178 dm³, 215 liter, dan 2,5 liter. Tentukan Benar atau Salah untuk setiap pernyataan berikut.', [
                 { text: 'Air yang dialirkan ke dalam bak adalah 600 liter.', correct: 'salah' },
-                { text: 'Ibu menggunakan air sebanyak 0,178 kL pada pemakaian pertama.', correct: 'salah' },
+                { text: 'Ibu menggunakan air sebanyak 0,178 kL pada pemakaian pertama.', correct: 'benar' },
                 { text: 'Sisa air di dalam bak setelah digunakan ibu adalah 504,5 liter.', correct: 'benar' },
-                { text: 'Sisa air yang tersisa di dalam toren adalah 300 liter.', correct: 'benar' }
+                { text: 'Sisa air yang tersisa di dalam toren adalah 300 liter.', correct: 'benar' },
+                { text: 'Air yang dialirkan dari toren ke bak sebanyak 900 liter.', correct: 'benar' }
             ]),
             bsQuestion(12, 'Ibu memiliki 28 kue getuk, 42 kue klepon, dan 14 kue lapis yang akan dibagikan kepada beberapa anak dengan jumlah dan jenis yang sama banyak. Tentukan Benar atau Salah untuk setiap pernyataan berikut.', [
                 { text: 'Paling banyak anak yang menerima kue tersebut adalah 14 orang.', correct: 'benar' },
-                { text: 'Setiap anak akan mendapat 3 buah klepon.', correct: 'salah' },
+                { text: 'Setiap anak akan mendapat 3 buah klepon.', correct: 'benar' },
                 { text: 'Selisih antara kue getuk dan kue lapis pada setiap anak adalah 2 buah.', correct: 'salah' },
-                { text: 'Jumlah seluruh kue yang diterima setiap anak adalah 6 buah.', correct: 'benar' }
+                { text: 'Jumlah seluruh kue yang diterima setiap anak adalah 6 buah.', correct: 'benar' },
+                { text: 'Setiap anak mendapat 2 buah kue getuk.', correct: 'benar' }
             ]),
             bsQuestion(13, 'Air dialirkan dari toren ke bak penampungan sebanyak 3/4 bagian. Tentukan Benar atau Salah untuk setiap pernyataan berikut.', [
-                { text: 'Persentase air yang dialirkan ke dalam bak adalah 75%.', correct: 'salah' },
+                { text: 'Persentase air yang dialirkan ke dalam bak adalah 75%.', correct: 'benar' },
                 { text: 'Sisa bagian air di dalam toren adalah 0,25 bagian.', correct: 'benar' }
             ]),
             bsQuestion(14, 'Gunung Galunggung meletus pada tahun 1982. Pada tahun itu kakek berusia 3 windu. Sebelum meletus, gunung beristirahat selama 65 tahun. Ketinggian gunung 2.168 m. Tentukan Benar atau Salah untuk setiap pernyataan berikut.', [
-                { text: 'Kakek lahir pada tahun 1958.', correct: 'salah' },
+                { text: 'Kakek lahir pada tahun 1958.', correct: 'benar' },
                 { text: 'Masa istirahat gunung selama 65 tahun setara dengan 13 lustrum.', correct: 'benar' },
                 { text: 'Hingga tahun 2025, Gunung Galunggung telah meletus selama 4 dekade lebih 3 tahun.', correct: 'benar' },
                 { text: 'Ketinggian Gunung Galunggung setara dengan 2,168 km.', correct: 'benar' }
             ]),
             bsQuestion(15, 'Usia Ayah adalah 4 dekade. Usia Ibu 4 tahun lebih muda dari Ayah. Selisih umur Ayah dan adiknya adalah 6 tahun. Tentukan Benar atau Salah untuk setiap pernyataan berikut.', [
                 { text: 'Jika saat ini tahun 2025, Ayah lahir pada tahun 1985.', correct: 'benar' },
-                { text: 'Usia Ibu saat ini setara dengan 4,5 windu.', correct: 'salah' },
+                { text: 'Usia Ibu saat ini setara dengan 4,5 windu.', correct: 'benar' },
                 { text: 'Selisih umur Ayah dan adiknya setara dengan 72 bulan.', correct: 'benar' },
                 { text: 'Umur adik Ayah adalah 34 tahun.', correct: 'benar' }
             ]),
@@ -1271,10 +1273,10 @@ Dokter kecil harus sigap dalam pelayanan kesehatan di sekolah. Untuk penanganan 
             pgkQuestion(24, 'Terdapat 36 dadar gulung, 30 lemper, dan 54 lumpia yang akan dimasukkan ke dalam beberapa piring secara merata. Pilihlah pernyataan yang benar.', ['Paling banyak piring yang digunakan adalah 3 piring.', 'Setiap piring berisi 9 lumpia.', 'Setiap piring berisi 6 dadar gulung.', 'Setiap piring berisi 10 lemper.'], ['B', 'C']),
             pgkQuestion(25, 'Mina dan keluarganya pergi ke Surabaya sejauh 187 km dengan kecepatan 55 km/jam. Mereka berangkat pukul 06.30 dan beristirahat selama 18 menit. Pilihlah pernyataan yang benar.', ['Waktu perjalanan tanpa istirahat adalah 3,4 jam.', 'Waktu istirahat adalah 3/10 jam.', 'Jarak 187 km setara dengan 18.700 dam.', 'Mina dan keluarganya tiba pukul 09.54.'], ['A', 'B', 'C']),
             pgkQuestion(26, 'Perhatikan sebuah segitiga sama sisi. Pilihlah pernyataan yang benar.', ['Ketiga sudutnya lancip karena besarnya antara 0°–90°.', 'Segitiga tersebut memiliki satu sudut siku-siku.', 'Ketiga sudutnya masing-masing 60°.', 'Ketiga sisinya sama panjang.'], ['A', 'C', 'D']),
-            pgkQuestion(27, 'Harga sayur: cabe Rp30.000/kg, terong Rp8.000/kg, sawi Rp5.000/ikat, dan bayam Rp4.000/ikat. Pilihlah pernyataan yang benar.', ['2 ikat sawi dan 3 kg kubis berharga Rp30.000,00.', '4 kg kol putih dan 6 ikat bayam berharga Rp48.000,00.', 'Selisih harga 2 kg cabe dan 3 kg terong adalah Rp36.000,00.', 'Selisih harga 5 ikat sawi dan 5 ikat bayam adalah Rp5.000,00.'], ['C', 'D']),
+            pgkQuestion(27, 'Harga sayur: cabe Rp30.000/kg, terong Rp8.000/kg, sawi Rp5.000/ikat, dan bayam Rp4.000/ikat. Pilihlah pernyataan yang benar.', ['2 ikat sawi dan 3 kg cabe berharga Rp30.000,00.', '4 kg terong dan 6 ikat bayam berharga Rp48.000,00.', 'Selisih harga 2 kg cabe dan 3 kg terong adalah Rp36.000,00.', 'Selisih harga 5 ikat sawi dan 5 ikat bayam adalah Rp5.000,00.'], ['C', 'D']),
             pgkQuestion(28, 'Truk A beroperasi setiap 6 hari, truk B setiap 5 hari, dan truk C setiap 4 hari. Ketiganya bertemu pada 3 Agustus 2025. Pilihlah pernyataan yang benar.', ['Truk A dan B bertemu setiap 30 hari sekali.', 'Truk A dan C bertemu setiap 12 hari sekali.', 'Truk B dan C bertemu setiap 30 hari sekali.', 'Kedua kalinya setelah 3 Agustus 2025, ketiga truk bertemu pada 2 Oktober 2025.'], ['A', 'B', 'D']),
             pgkQuestion(29, 'Akuarium balok berukuran 48 cm × 35 cm × 60 cm diisi air sebanyak 13/15 bagian. Pilihlah pernyataan yang benar.', ['Luas permukaan akuarium adalah 11.680 cm².', 'Kapasitas akuarium adalah 100,8 liter.', 'Banyak air di dalam akuarium adalah 87.360 mℓ.', 'Air yang perlu ditambahkan agar penuh adalah 13.340 mℓ.'], ['B', 'C']),
-            pgkQuestion(30, 'Tumpukan lego Yadi terdiri atas 3 tingkat: tingkat atas 2 lego kubus, tingkat tengah 4 lego kubus, dan tingkat bawah 10 lego kubus. Pilihlah pernyataan yang benar.', ['Tingkat 3 (bagian atas) terdapat 2 lego kubus.', 'Tingkat 2 (bagian tengah) terdapat 3 lego kubus.', 'Tingkat 1 (bagian bawah) terdapat 10 lego kubus.', 'Banyak seluruh lego kubus adalah 18 buah.'], ['A', 'C'])
+            pgkQuestion(30, 'Tumpukan lego Yadi terdiri atas 3 tingkat: tingkat atas 2 lego kubus, tingkat tengah 4 lego kubus, dan tingkat bawah 10 lego kubus. Pilihlah pernyataan yang benar.', ['Tingkat 3 (bagian atas) terdapat 2 lego kubus.', 'Tingkat 2 (bagian tengah) terdapat 3 lego kubus.', 'Tingkat 1 (bagian bawah) terdapat 10 lego kubus.', 'Banyak seluruh lego kubus adalah 18 buah.'], ['A', 'C']),
         ];
 
         const indoQuestions = soalMatematika;
@@ -1838,25 +1840,25 @@ Dokter kecil harus sigap dalam pelayanan kesehatan di sekolah. Untuk penanganan 
 
             if (question.type === 'benarSalah') {
                 if (typeof answer !== 'object' || Array.isArray(answer)) return 0;
-                const total = question.statements.length;
-                if (!total) return 0;
-                const correctParts = question.statements.reduce((count, statement, statementIndex) => {
+                return question.statements.reduce((count, statement, statementIndex) => {
                     return count + (answer[statementIndex] === statement.correct ? 1 : 0);
                 }, 0);
-                return correctParts / total;
             }
 
             if (question.multiSelect) {
                 const selected = Array.isArray(answer) ? answer : [];
-                if (!selected.length) return 0;
                 const correctKeys = Array.isArray(question.correct) ? question.correct : [question.correct];
                 const optionKeys = (question.options || []).map(opt => opt.key);
-                if (!optionKeys.length) return 0;
-                const correctJudgments = optionKeys.filter(key => correctKeys.includes(key) === selected.includes(key)).length;
-                return correctJudgments / optionKeys.length;
+                return optionKeys.filter(key => correctKeys.includes(key) === selected.includes(key)).length;
             }
 
             return answer === question.correct ? 1 : 0;
+        }
+
+        function getQuestionPointCount(question) {
+            if (question.type === 'benarSalah') return question.statements.length;
+            if (question.multiSelect) return (question.options || []).length;
+            return 1;
         }
 
         function submitExam() {
@@ -1865,11 +1867,13 @@ Dokter kecil harus sigap dalam pelayanan kesehatan di sekolah. Untuk penanganan 
             if (timerInterval) clearInterval(timerInterval);
 
             let earnedPoints = 0;
+            let totalPoints = 0;
             examQuestions.forEach((q, idx) => {
                 earnedPoints += getQuestionScore(q, userAnswers[idx]);
+                totalPoints += getQuestionPointCount(q);
             });
 
-            const score = Math.round((earnedPoints / examQuestions.length) * 100);
+            const score = Math.round((earnedPoints / 90) * 100);
             const correctCount = earnedPoints;
 
             // Format tanggal lahir untuk ringkasan hasil
@@ -1891,12 +1895,12 @@ Dokter kecil harus sigap dalam pelayanan kesehatan di sekolah. Untuk penanganan 
             document.getElementById('res-ttl').textContent = formattedDate;
             document.getElementById('res-mapel').textContent = studentData.mapel;
             document.getElementById('res-score').textContent = score;
-            document.getElementById('res-summary').textContent = `Perolehan ${formatScorePoints(correctCount)} dari ${examQuestions.length} soal`;
+            document.getElementById('res-summary').textContent = `Perolehan ${formatScorePoints(correctCount)} dari ${totalPoints} butir penilaian`;
 
-            sendResultsToGoogleSheets(score, correctCount);
+            sendResultsToGoogleSheets(score, correctCount, totalPoints);
         }
 
-        function sendResultsToGoogleSheets(score, correctCount) {
+        function sendResultsToGoogleSheets(score, correctCount, totalPoints) {
             const scriptUrl = getScriptUrl();
             const statusEl = document.getElementById('post-status-message');
 
@@ -1928,7 +1932,7 @@ Dokter kecil harus sigap dalam pelayanan kesehatan di sekolah. Untuk penanganan 
                 tanggalLahir: formattedDate,
                 mapel: studentData.mapel,
                 nilai: score,
-                ringkasan: `Perolehan ${formatScorePoints(correctCount)} dari ${examQuestions.length} soal`
+                ringkasan: `Perolehan ${formatScorePoints(correctCount)} dari ${totalPoints} butir penilaian`
             };
 
             fetch(scriptUrl, {
