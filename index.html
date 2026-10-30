@@ -642,6 +642,7 @@ function doPost(e) {
                     <p class="text-xs uppercase tracking-widest text-blue-200 font-bold mb-1">Nilai Akhir Anda</p>
                     <div class="text-5xl font-extrabold text-amber-400 my-1" id="res-score">100</div>
                     <p class="text-xs text-slate-200" id="res-summary">Benar 50 dari 50 Soal</p>
+                    <p class="text-[10px] text-blue-200 mt-2 leading-relaxed" id="res-scoring-note">Pilihan Ganda dinilai utuh. Benar/Salah dan Pilihan Ganda Kompleks dinilai per bagian.</p>
                 </div>
 
                 <div id="post-status-message" class="text-xs text-slate-500 mb-4 font-semibold">
@@ -1820,36 +1821,56 @@ Dokter kecil harus sigap dalam pelayanan kesehatan di sekolah. Untuk penanganan 
             submitExam();
         }
 
+        function formatScorePoints(value) {
+            const rounded = Math.round(value * 100) / 100;
+            if (Number.isInteger(rounded)) return String(rounded);
+            return rounded.toFixed(2).replace('.', ',');
+        }
+
+        function getQuestionScore(question, answer) {
+            if (answer === undefined || answer === null || answer === '') return 0;
+
+            if (question.type === 'short') {
+                const userVal = String(answer).trim().toLowerCase();
+                if (!userVal) return 0;
+                return (question.acceptedAnswers || []).some(ans => String(ans).toLowerCase() === userVal) ? 1 : 0;
+            }
+
+            if (question.type === 'benarSalah') {
+                if (typeof answer !== 'object' || Array.isArray(answer)) return 0;
+                const total = question.statements.length;
+                if (!total) return 0;
+                const correctParts = question.statements.reduce((count, statement, statementIndex) => {
+                    return count + (answer[statementIndex] === statement.correct ? 1 : 0);
+                }, 0);
+                return correctParts / total;
+            }
+
+            if (question.multiSelect) {
+                const selected = Array.isArray(answer) ? answer : [];
+                if (!selected.length) return 0;
+                const correctKeys = Array.isArray(question.correct) ? question.correct : [question.correct];
+                const optionKeys = (question.options || []).map(opt => opt.key);
+                if (!optionKeys.length) return 0;
+                const correctJudgments = optionKeys.filter(key => correctKeys.includes(key) === selected.includes(key)).length;
+                return correctJudgments / optionKeys.length;
+            }
+
+            return answer === question.correct ? 1 : 0;
+        }
+
         function submitExam() {
             if (examSubmitted) return;
             examSubmitted = true;
             if (timerInterval) clearInterval(timerInterval);
 
-            // Calculate score
-            let correctCount = 0;
+            let earnedPoints = 0;
             examQuestions.forEach((q, idx) => {
-                if (q.type === 'short') {
-                    const userVal = (userAnswers[idx] || '').trim().toLowerCase();
-                    if (userVal && q.acceptedAnswers.some(ans => ans.toLowerCase() === userVal)) {
-                        correctCount++;
-                    }
-                } else if (q.type === 'benarSalah') {
-                    const ans = userAnswers[idx] || {};
-                    const isCorrect = q.statements.every((statement, statementIndex) => ans[statementIndex] === statement.correct);
-                    if (isCorrect) correctCount++;
-                } else {
-                    const isCorrect = q.multiSelect
-                        ? Array.isArray(userAnswers[idx])
-                            && q.correct.length === userAnswers[idx].length
-                            && q.correct.every(key => userAnswers[idx].includes(key))
-                        : userAnswers[idx] === q.correct;
-                    if (isCorrect) {
-                        correctCount++;
-                    }
-                }
+                earnedPoints += getQuestionScore(q, userAnswers[idx]);
             });
 
-            const score = Math.round((correctCount / examQuestions.length) * 100);
+            const score = Math.round((earnedPoints / examQuestions.length) * 100);
+            const correctCount = earnedPoints;
 
             // Format tanggal lahir untuk ringkasan hasil
             let formattedDate = studentData.tanggalLahir;
@@ -1870,7 +1891,7 @@ Dokter kecil harus sigap dalam pelayanan kesehatan di sekolah. Untuk penanganan 
             document.getElementById('res-ttl').textContent = formattedDate;
             document.getElementById('res-mapel').textContent = studentData.mapel;
             document.getElementById('res-score').textContent = score;
-            document.getElementById('res-summary').textContent = `Benar ${correctCount} dari ${examQuestions.length} Soal`;
+            document.getElementById('res-summary').textContent = `Perolehan ${formatScorePoints(correctCount)} dari ${examQuestions.length} soal`;
 
             sendResultsToGoogleSheets(score, correctCount);
         }
@@ -1907,7 +1928,7 @@ Dokter kecil harus sigap dalam pelayanan kesehatan di sekolah. Untuk penanganan 
                 tanggalLahir: formattedDate,
                 mapel: studentData.mapel,
                 nilai: score,
-                ringkasan: `Benar ${correctCount} dari ${examQuestions.length} Soal`
+                ringkasan: `Perolehan ${formatScorePoints(correctCount)} dari ${examQuestions.length} soal`
             };
 
             fetch(scriptUrl, {
